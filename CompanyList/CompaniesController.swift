@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CompaniesController: UITableViewController {
+class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
 
-    let companies = [
+    var companies = [
         Company(name: "Apple", founded: Date()),
         Company(name: "Google", founded: Date()),
         Company(name: "Facebook", founded: Date())
@@ -34,7 +34,17 @@ class CompaniesController: UITableViewController {
         let createCompanyController = CreateCompanyController()
         let navController = CustomNavigationController(rootViewController: createCompanyController)
 
+        createCompanyController.delegate = self
+
         present(navController, animated: true, completion: nil)
+    }
+
+    func didAddCompany(company: Company) {
+        let tesla = Company(name: company.name, founded: Date())
+        companies.append(tesla)
+
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
 
     //MARK: Tableview Delegate Methods
