@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9036BA4B203746930067C4CE /* CompanyListModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9036BA48203745E60067C4CE /* CompanyListModels.xcdatamodeld */; };
+		9036BA4D2037508A0067C4CE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9036BA4C2037508A0067C4CE /* CoreDataManager.swift */; };
 		908A5DDF20364E400039A0B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A5DDE20364E400039A0B8 /* AppDelegate.swift */; };
 		908A5DE120364E400039A0B8 /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A5DE020364E400039A0B8 /* CompaniesController.swift */; };
 		908A5DE420364E400039A0B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 908A5DE220364E400039A0B8 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		9036BA49203745E60067C4CE /* CompanyListModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyListModels.xcdatamodel; sourceTree = "<group>"; };
+		9036BA4C2037508A0067C4CE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		908A5DDB20364E400039A0B8 /* CompanyList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompanyList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		908A5DDE20364E400039A0B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		908A5DE020364E400039A0B8 /* CompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				908A5DEA20364E400039A0B8 /* Info.plist */,
 				908A5DF420365C2B0039A0B8 /* Company.swift */,
 				9036BA48203745E60067C4CE /* CompanyListModels.xcdatamodeld */,
+				9036BA4C2037508A0067C4CE /* CoreDataManager.swift */,
 			);
 			path = CompanyList;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				908A5DF520365C2B0039A0B8 /* Company.swift in Sources */,
 				9036BA4B203746930067C4CE /* CompanyListModels.xcdatamodeld in Sources */,
 				908A5DDF20364E400039A0B8 /* AppDelegate.swift in Sources */,
+				9036BA4D2037508A0067C4CE /* CoreDataManager.swift in Sources */,
 				908A5DF720365F270039A0B8 /* CreateCompanyController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,14 +36,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
 
     private func fetchCompanies() {
-        let persistentContainer = NSPersistentContainer(name: "CompanyListModels")
-        persistentContainer.loadPersistentStores { (storeDescription, err) in
-            if let err = err {
-                fatalError("Loading of store failed \(err)")
-            }
-        }
-
-        let context = persistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
 
         do {
@@ -51,6 +44,10 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
             companies.forEach({ (company) in
                 print(company.name ?? "")
             })
+
+            self.companies = companies
+            self.tableView.reloadData()
+            
         } catch let fetchErr {
             print("Failed to fetch companies: \(fetchErr)")
         }
@@ -66,11 +63,9 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
 
     func didAddCompany(company: Company) {
-//        let tesla = Company(name: company.name, founded: Date())
-//        companies.append(tesla)
-//
-//        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
-//        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        companies.append(company)
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
 
     //MARK: Tableview Delegate Methods
