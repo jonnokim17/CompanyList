@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
 
-    var companies = [
-        Company(name: "Apple", founded: Date()),
-        Company(name: "Google", founded: Date()),
-        Company(name: "Facebook", founded: Date())
-    ]
+    var companies = [Company]()
+
+//    var companies = [
+//        Company(name: "Apple", founded: Date()),
+//        Company(name: "Google", founded: Date()),
+//        Company(name: "Facebook", founded: Date())
+//    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        fetchCompanies()
 
         view.backgroundColor = .white
         navigationItem.title = "Companies"
@@ -30,6 +35,27 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(handleAddCompany))
     }
 
+    private func fetchCompanies() {
+        let persistentContainer = NSPersistentContainer(name: "CompanyListModels")
+        persistentContainer.loadPersistentStores { (storeDescription, err) in
+            if let err = err {
+                fatalError("Loading of store failed \(err)")
+            }
+        }
+
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+
+        do {
+            let companies = try context.fetch(fetchRequest)
+            companies.forEach({ (company) in
+                print(company.name ?? "")
+            })
+        } catch let fetchErr {
+            print("Failed to fetch companies: \(fetchErr)")
+        }
+    }
+
     @objc func handleAddCompany() {
         let createCompanyController = CreateCompanyController()
         let navController = CustomNavigationController(rootViewController: createCompanyController)
@@ -40,11 +66,11 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
 
     func didAddCompany(company: Company) {
-        let tesla = Company(name: company.name, founded: Date())
-        companies.append(tesla)
-
-        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
+//        let tesla = Company(name: company.name, founded: Date())
+//        companies.append(tesla)
+//
+//        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+//        tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
 
     //MARK: Tableview Delegate Methods
