@@ -11,9 +11,16 @@ import CoreData
 
 protocol CreateCompanyControllerDelegate {
     func didAddCompany(company: Company)
+    func didEditCompany(company: Company)
 }
 
 class CreateCompanyController: UIViewController {
+    var company: Company? {
+        didSet {
+            nameTextField.text = company?.name
+        }
+    }
+
     var delegate: CreateCompanyControllerDelegate?
 
     let nameLabel: UILabel = {
@@ -32,13 +39,18 @@ class CreateCompanyController: UIViewController {
         return textField
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationItem.title = company == nil ? "Create Company" : "Edit Company"
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
 
         view.backgroundColor = .darkBlue
-        navigationItem.title = "Create Company"
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
 
@@ -75,6 +87,14 @@ class CreateCompanyController: UIViewController {
     }
 
     @objc func handleSave() {
+        if company == nil {
+            createCompany()
+        } else {
+            saveCompanyChanges()
+        }
+    }
+
+    private func createCompany() {
         //initialize Core Data stack
         let context = CoreDataManager.shared.persistentContainer.viewContext
 
@@ -91,6 +111,20 @@ class CreateCompanyController: UIViewController {
 
         } catch let saveErr {
             print("Failed to save company: \(saveErr)")
+        }
+    }
+
+    private func saveCompanyChanges() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        company?.name = nameTextField.text
+
+        do {
+            try context.save()
+            dismiss(animated: true, completion: {
+                self.delegate?.didEditCompany(company: self.company!)
+            })
+        } catch let saveErr {
+            print("Failed to save company changes: \(saveErr)")
         }
     }
 }
