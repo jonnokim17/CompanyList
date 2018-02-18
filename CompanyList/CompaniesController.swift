@@ -13,12 +13,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 
     var companies = [Company]()
 
-//    var companies = [
-//        Company(name: "Apple", founded: Date()),
-//        Company(name: "Google", founded: Date()),
-//        Company(name: "Facebook", founded: Date())
-//    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -94,6 +88,29 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let company = self.companies[indexPath.row]
+
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(company)
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to delete company: \(saveErr)")
+            }
+        }
+
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            print("Editing company...")
+        }
+
+        return [deleteAction, editAction]
     }
 }
 

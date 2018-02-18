@@ -16,7 +16,6 @@
 		908A5DE920364E400039A0B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 908A5DE720364E400039A0B8 /* LaunchScreen.storyboard */; };
 		908A5DF1203652670039A0B8 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A5DF0203652670039A0B8 /* CustomNavigationController.swift */; };
 		908A5DF3203658C00039A0B8 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A5DF2203658C00039A0B8 /* UIColor+Theme.swift */; };
-		908A5DF520365C2B0039A0B8 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A5DF420365C2B0039A0B8 /* Company.swift */; };
 		908A5DF720365F270039A0B8 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908A5DF620365F270039A0B8 /* CreateCompanyController.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		908A5DEA20364E400039A0B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		908A5DF0203652670039A0B8 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		908A5DF2203658C00039A0B8 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
-		908A5DF420365C2B0039A0B8 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		908A5DF620365F270039A0B8 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +73,6 @@
 				908A5DE520364E400039A0B8 /* Assets.xcassets */,
 				908A5DE720364E400039A0B8 /* LaunchScreen.storyboard */,
 				908A5DEA20364E400039A0B8 /* Info.plist */,
-				908A5DF420365C2B0039A0B8 /* Company.swift */,
 				9036BA48203745E60067C4CE /* CompanyListModels.xcdatamodeld */,
 				9036BA4C2037508A0067C4CE /* CoreDataManager.swift */,
 			);
@@ -157,7 +154,6 @@
 				908A5DF1203652670039A0B8 /* CustomNavigationController.swift in Sources */,
 				908A5DF3203658C00039A0B8 /* UIColor+Theme.swift in Sources */,
 				908A5DE120364E400039A0B8 /* CompaniesController.swift in Sources */,
-				908A5DF520365C2B0039A0B8 /* Company.swift in Sources */,
 				9036BA4B203746930067C4CE /* CompanyListModels.xcdatamodeld in Sources */,
 				908A5DDF20364E400039A0B8 /* AppDelegate.swift in Sources */,
 				9036BA4D2037508A0067C4CE /* CoreDataManager.swift in Sources */,
