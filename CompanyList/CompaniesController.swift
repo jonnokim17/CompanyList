@@ -79,7 +79,15 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
 
         let company = companies[indexPath.row]
-        cell.textLabel?.text = company.name
+        if let name = company.name, let founded = company.founded {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            let foundedDateString = dateFormatter.string(from: founded)
+            let dateString = "\(name) - Founded: \(foundedDateString)"
+            cell.textLabel?.text = dateString
+        } else {
+            cell.textLabel?.text = company.name
+        }
 
         cell.backgroundColor = .tealColor
         cell.textLabel?.textColor = .white
@@ -124,8 +132,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
 
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
-        print("Editing company in separate function \(self.companies[indexPath.row].name ?? "")")
-
         let editCompanyController = CreateCompanyController()
         editCompanyController.delegate = self
         editCompanyController.company = companies[indexPath.row]
