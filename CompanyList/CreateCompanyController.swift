@@ -19,9 +19,21 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         didSet {
             nameTextField.text = company?.name
 
+            if let imageData = company?.imageData {
+                companyImageView.image = UIImage(data: imageData)
+                setCircularImageStyle()
+            }
+
             guard let founded = company?.founded else { return }
             datePicker.date = founded
         }
+    }
+
+    private func setCircularImageStyle() {
+        companyImageView.layer.cornerRadius = companyImageView.frame.width / 2
+        companyImageView.clipsToBounds = true
+        companyImageView.layer.borderColor = UIColor.darkBlue.cgColor
+        companyImageView.layer.borderWidth = 2
     }
 
     var delegate: CreateCompanyControllerDelegate?
@@ -29,6 +41,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     lazy var companyImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
         return imageView
@@ -52,6 +65,8 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             companyImageView.image = originalImage
         }
+
+        setCircularImageStyle()
 
         dismiss(animated: true, completion: nil)
     }
@@ -113,7 +128,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         companyImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
         companyImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         companyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        companyImageView.widthAnchor.constraint(equalToConstant: 100)
+        companyImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
         view.addSubview(nameLabel)
         nameLabel.topAnchor.constraint(equalTo: companyImageView.bottomAnchor).isActive = true
@@ -154,6 +169,11 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         company.setValue(nameTextField.text, forKey: "name")
         company.setValue(datePicker.date, forKey: "founded")
 
+        if let companyImage = companyImageView.image {
+            let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
+            company.setValue(imageData, forKey: "imageData")
+        }
+
         //perform save
         do {
             try context.save()
@@ -171,6 +191,11 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         let context = CoreDataManager.shared.persistentContainer.viewContext
         company?.name = nameTextField.text
         company?.founded = datePicker.date
+
+        if let companyImage = companyImageView.image {
+            let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
+            company?.imageData = imageData
+        }
 
         do {
             try context.save()
