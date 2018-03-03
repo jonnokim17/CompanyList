@@ -9,6 +9,12 @@
 import UIKit
 
 extension CompaniesController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let employeesController = EmployeesController()
+        employeesController.company = companies[indexPath.row]
+        navigationController?.pushViewController(employeesController, animated: true)
+    }
+
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: deleteHandlerFunction)
         deleteAction.backgroundColor = .lightRed

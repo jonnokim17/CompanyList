@@ -27,7 +27,7 @@ class CompaniesController: UITableViewController {
         tableView.separatorColor = .white
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"), style: .plain, target: self, action: #selector(handleAddCompany))
+        setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
     }
 
     @objc private func handleReset() {
